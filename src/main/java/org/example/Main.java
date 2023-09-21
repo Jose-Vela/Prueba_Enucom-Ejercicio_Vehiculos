@@ -30,38 +30,31 @@ public class Main {
     }
 
     private static void mostrarTodosLosVehiculos() {
-        String marca, modelo;
-        float precio;
+        if(!vehiculos.isEmpty()){
+            String marca, modelo;
+            float precio;
 
-        for(int i = 0; i< vehiculos.size(); i++) {
-            marca = vehiculos.get(i).getMarca();
-            modelo = vehiculos.get(i).getModelo();
-            precio = vehiculos.get(i).getPrecio();
+            for(int i = 0; i< vehiculos.size(); i++) {
+                marca = vehiculos.get(i).getMarca();
+                modelo = vehiculos.get(i).getModelo();
+                precio = vehiculos.get(i).getPrecio();
 
-            System.out.println(i+1 + " - Marca: " + marca + ", Modelo: " + modelo + ", Precio:" + precio);
+                System.out.println(i+1 + " - Marca: " + marca + ", Modelo: " + modelo + ", Precio:" + precio);
+            }
+            teclado.nextLine();
         }
-        teclado.nextLine();
     }
 
     private static void mostrarMasBarato() {
-        int indiceMasBarato = calcularVehiculoMasBarato();
-        String marca = vehiculos.get(indiceMasBarato).getMarca();
-        String modelo = vehiculos.get(indiceMasBarato).getModelo();
-        float precio = vehiculos.get(indiceMasBarato).getPrecio();
+        if(!vehiculos.isEmpty()){
+            int indiceMasBarato = calcularVehiculoMasBarato();
+            String marca = vehiculos.get(indiceMasBarato).getMarca();
+            String modelo = vehiculos.get(indiceMasBarato).getModelo();
+            float precio = vehiculos.get(indiceMasBarato).getPrecio();
 
-        System.out.println("Marca: " + marca + ", Modelo: " + modelo + ", Precio:" + precio);
-
-    }
-
-    private static int calcularVehiculoMasBarato() {
-        int indice = 0;
-        float precioMasBarato = vehiculos.get(0).getPrecio();
-        for(int i = 1; i < vehiculos.size(); i++) {
-            if (vehiculos.get(i).getPrecio() < precioMasBarato) {
-                indice = i;
-            }
+            System.out.println("Marca: " + marca + ", Modelo: " + modelo + ", Precio:" + precio);
+            teclado.nextLine();
         }
-        return indice;
     }
 
     private static void agregarVehiculo() {
@@ -77,5 +70,17 @@ public class Main {
         teclado.nextLine();
 
         vehiculos.add(new Vehiculo(marca, modelo, precio));
+    }
+
+    private static int calcularVehiculoMasBarato() {
+        int indice = 0;
+        float precioMasBarato = vehiculos.get(0).getPrecio();
+        for(int i = 1; i < vehiculos.size(); i++) {
+            if (vehiculos.get(i).getPrecio() < precioMasBarato) {
+                precioMasBarato = vehiculos.get(i).getPrecio();
+                indice = i;
+            }
+        }
+        return indice;
     }
 }
